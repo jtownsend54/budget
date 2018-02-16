@@ -31,7 +31,7 @@ class BudgetController extends Controller
         return redirect(route('budgets'));
     }
 
-    public function patch(Budget $budget)
+    public function update(Budget $budget)
     {
         $budget->update(request(['name', 'start', 'end', 'from_last_month', 'added_this_month']));
 

@@ -3,7 +3,7 @@
 @section('content_title') Edit Budget @endsection
 
 @section('content')
-    <form method="post" action="{{ route('budget_patch', ['budget' => $budget]) }}" class="form">
+    <form method="post" action="{{ route('budget_update', ['budget' => $budget]) }}" class="form">
         <input type="hidden" name="_method" value="PATCH">
         {{ csrf_field() }}
         <div class="form-group">

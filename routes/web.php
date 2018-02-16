@@ -17,7 +17,8 @@ Route::get('/budgets', 'BudgetController@index')->name('budgets');
 Route::get('/budgets/create', 'BudgetController@create')->name('budget_create');
 Route::get('/budgets/{budget}', 'BudgetController@show')->name('budget_show');
 Route::post('/budgets', 'BudgetController@store')->name('budget_store');
-Route::patch('/budgets/{budget}', 'BudgetController@patch')->name('budget_patch');
+Route::patch('/budgets/{budget}', 'BudgetController@update')->name('budget_update');
+
 Route::get('/budget-categories', 'BudgetCategoriesController@index')->name('budget_categories');
 Route::get('/budget-categories/create', 'BudgetCategoriesController@create')->name('budget_categories_create');
 Route::get('/budget-categories/{budgetCategory}', 'BudgetCategoriesController@show')->name('budget_categories_show');
