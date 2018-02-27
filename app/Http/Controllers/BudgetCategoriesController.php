@@ -45,35 +45,25 @@ class BudgetCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param BudgetCategory $budgetCategory
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BudgetCategory $budgetCategory)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('budget_categories.show', compact('budgetCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param BudgetCategory $budgetCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BudgetCategory $budgetCategory)
     {
-        //
+        $budgetCategory->update(request(['name']));
+
+        return redirect(route('budgets'));
     }
 
     /**

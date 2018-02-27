@@ -16,7 +16,6 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-//        dd(Expense::ofCategory(1)->get());
         return view('expenses.index', [
             'categories' => BudgetCategory::all()
         ]);
@@ -60,35 +59,28 @@ class ExpensesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Expense $expense
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Expense $expense)
     {
-        //
-    }
+        $categories = BudgetCategory::all();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('expenses.show', compact('expense', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param Expense $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Expense $expense)
     {
-        //
+        $expense->update(request(['budget_category_id', 'amount', 'source', 'date_charged', 'date_paid']));
+
+        return redirect(route('expenses'));
     }
 
     /**
