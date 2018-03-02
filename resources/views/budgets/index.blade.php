@@ -11,7 +11,7 @@
                 <th>Budget Period</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>Start on the 1st</th>
+                <th>Amount on the 1st</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                 <td>{{ $budget->name }}</td>
                 <td>{{ $budget->start->toFormattedDateString() }}</td>
                 <td>{{ $budget->end->toFormattedDateString() }}</td>
-                <td>{{ $budget->from_last_month }}</td>
+                <td>{{ $budget->bank_start }}</td>
                 <td><a href="{{ route('budget_show', ['budget' => $budget]) }}" class="btn btn-sm btn-primary">Edit</a></td>
             </tr>
         @endforeach

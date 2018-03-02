@@ -26,14 +26,14 @@ class BudgetController extends Controller
 
     public function store()
     {
-        Budget::create(request(['name', 'start', 'end', 'from_last_month', 'added_this_month']));
+        Budget::create(request(['name', 'start', 'end', 'bank_start']));
 
         return redirect(route('budgets'));
     }
 
     public function update(Budget $budget)
     {
-        $budget->update(request(['name', 'start', 'end', 'from_last_month', 'added_this_month']));
+        $budget->update(request(['name', 'start', 'end', 'bank_start']));
 
         return redirect(route('budgets'));
     }

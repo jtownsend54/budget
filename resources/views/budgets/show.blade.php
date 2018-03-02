@@ -19,12 +19,8 @@
             <input type="text" name="end" class="form-control" value="{{ $budget->end }}">
         </div>
         <div class="form-group">
-            <label for="last_month">From Last Month</label>
-            <input type="text" name="from_last_month" class="form-control" value="{{ $budget->from_last_month }}">
-        </div>
-        <div class="form-group">
-            <label for="this_month">Added to this Month</label>
-            <input type="text" name="added_this_month" class="form-control" value="{{ $budget->added_this_month }}">
+            <label for="bank_start">Amount in bank on the 1st</label>
+            <input type="text" name="bank_start" class="form-control" value="{{ $budget->bank_start }}">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>
