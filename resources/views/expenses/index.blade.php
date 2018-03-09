@@ -4,14 +4,14 @@
 
 @section('content')
     <div id="accordion">
-        @foreach($categories as $category)
+        @foreach($budgetAmounts as $budgetAmount)
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ $category->id }}" aria-expanded="true" aria-controls="collapse{{ $category->id }}">
-                            {{ $category->name }}
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ $budgetAmount->id }}" aria-expanded="true" aria-controls="collapse{{ $budgetAmount->id }}">
+                            {{ $budgetAmount->budgetCategory->name }}
                         </button>
-                        <a href="{{ route('expense_create', ['budget_category' => $category]) }}" class="btn btn-primary btn-sm float-right">New</a>
+                        <a href="{{ route('expense_create', ['budget_amount' => $budgetAmount]) }}" class="btn btn-primary btn-sm float-right">New</a>
                     </h5>
                 </div>
 
@@ -26,7 +26,7 @@
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
-                            @foreach(\App\Expense::ofCategory($category->id)->get() as $expense)
+                            @foreach(\App\Expense::ofCategory($budgetAmount->budget_category_id)->get() as $expense)
                                 <tr>
                                     <td>{{ $expense->created_at->toFormattedDateString() }}</td>
                                     <td>{{ $expense->source }}</td>

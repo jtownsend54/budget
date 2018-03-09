@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Budget;
+use App\BudgetAmount;
 use App\BudgetCategory;
 use App\Expense;
 use Illuminate\Http\Request;
@@ -17,21 +18,23 @@ class ExpensesController extends Controller
     public function index()
     {
         return view('expenses.index', [
-            'categories' => BudgetCategory::all()
+            'budgetAmounts' => Budget::current()->budgetAmounts
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param BudgetCategory $budgetCategory
+     * @param BudgetAmount $budgetAmount
      * @return \Illuminate\Http\Response
      */
-    public function create(BudgetCategory $budgetCategory)
+    public function create(BudgetAmount $budgetAmount)
     {
-        $categories = BudgetCategory::all();
+        /** @var Budget $currentBudget */
+        $currentBudget = Budget::current();
+        $budgetAmounts = $currentBudget->budgetAmounts;
 
-        return view('expenses.create', compact('budgetCategory','categories'));
+        return view('expenses.create', compact('budgetAmount','budgetAmounts'));
     }
 
     /**
@@ -41,16 +44,14 @@ class ExpensesController extends Controller
      */
     public function store()
     {
-        $currentBudget = Budget::current();
-        $values = request(['budget_category_id', 'amount', 'source', 'date_charged', 'date_paid']);
+        $values = request(['budget_amount_id', 'amount', 'source', 'date_charged', 'date_paid']);
 
         Expense::create([
-            'budget_category_id'    => $values['budget_category_id'],
+            'budget_amount_id'    => $values['budget_amount_id'],
             'amount'                => $values['amount'],
             'source'                => $values['source'],
             'date_charged'          => $values['date_charged'],
             'date_paid'             => $values['date_paid'],
-            'budget_id'             => $currentBudget->id,
         ]);
 
         return redirect(route('expenses'));
@@ -78,7 +79,7 @@ class ExpensesController extends Controller
      */
     public function update(Expense $expense)
     {
-        $expense->update(request(['budget_category_id', 'amount', 'source', 'date_charged', 'date_paid']));
+        $expense->update(request(['budget_amount_id', 'amount', 'source', 'date_charged', 'date_paid']));
 
         return redirect(route('expenses'));
     }

@@ -6,8 +6,8 @@
     <form method="post" action="{{ route('expense_store') }}" class="form">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="budget_category_id">Category</label>
-            <select name="budget_category_id" class="form-control">
+            <label for="budget_amount_id">Category</label>
+            <select name="budget_amount_id" class="form-control">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" @if($budgetCategory->id == $category->id)selected="selected"@endif>{{ $category->name }}</option>
                 @endforeach

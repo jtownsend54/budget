@@ -18,8 +18,9 @@ class Expense extends Model
         $currentBudget = Budget::current();
 
         $query
-            ->where('budget_category_id', '=', $categoryId)
-            ->where('budget_id', '=', $currentBudget->id)
+            ->leftJoin('budget_amounts', 'expenses.budget_amount_id', '=', 'budget_amounts.id')
+            ->where('budget_amounts.budget_id', '=', $currentBudget->id)
+            ->where('budget_amounts.budget_category_id', '=', $categoryId)
             ->orderBy('date_charged')
         ;
     }

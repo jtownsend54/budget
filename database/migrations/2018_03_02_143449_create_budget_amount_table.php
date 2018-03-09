@@ -17,8 +17,8 @@ class CreateBudgetAmountTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('budget_category_id');
-            $table->float('adjustment');
-            $table->float('added_to_this_month');
+            $table->float('adjustment')->nullable();
+            $table->float('added_to_this_month')->nullable();
         });
     }
 
