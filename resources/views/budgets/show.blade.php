@@ -22,6 +22,24 @@
             <label for="bank_start">Amount in bank on the 1st</label>
             <input type="text" name="bank_start" class="form-control" value="{{ $budget->bank_start }}">
         </div>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th>Category</th>
+                <th>From Last Month</th>
+                <th>Adjustment</th>
+                <th>Added to this Month</th>
+            </tr>
+            </thead>
+            @foreach($budget->budgetAmounts as $budgetAmount)
+                <tr>
+                    <td>{{ $budgetAmount->budgetCategory->name }}</td>
+                    <td></td>
+                    <td><input type="text" class="form-control" name="budget_amounts[{{$budgetAmount->getKey()}}][adjustment]" value="{{$budgetAmount->adjustment}}"/></td>
+                    <td><input type="text" class="form-control" name="budget_amounts[{{$budgetAmount->getKey()}}][added_to_this_month]" value="{{$budgetAmount->added_to_this_month}}"/></td>
+                </tr>
+            @endforeach
+        </table>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
