@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at', 'date_paid', 'date_charged'];
 
     /**
      * @param Builder $query

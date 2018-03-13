@@ -47,11 +47,11 @@ class ExpensesController extends Controller
         $values = request(['budget_amount_id', 'amount', 'source', 'date_charged', 'date_paid']);
 
         Expense::create([
-            'budget_amount_id'    => $values['budget_amount_id'],
-            'amount'                => $values['amount'],
-            'source'                => $values['source'],
-            'date_charged'          => $values['date_charged'],
-            'date_paid'             => $values['date_paid'],
+            'budget_amount_id'  => $values['budget_amount_id'],
+            'amount'            => $values['amount'],
+            'source'            => $values['source'],
+            'date_charged'      => $values['date_charged'],
+            'date_paid'         => $values['date_paid'],
         ]);
 
         return redirect(route('expenses'));
@@ -66,9 +66,11 @@ class ExpensesController extends Controller
      */
     public function show(Expense $expense)
     {
-        $categories = BudgetCategory::all();
+        /** @var Budget $currentBudget */
+        $currentBudget = Budget::current();
+        $budgetAmounts = $currentBudget->budgetAmounts;
 
-        return view('expenses.show', compact('expense', 'categories'));
+        return view('expenses.show', compact('expense', 'budgetAmounts'));
     }
 
     /**

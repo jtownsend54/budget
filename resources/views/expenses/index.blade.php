@@ -15,7 +15,7 @@
                     </h5>
                 </div>
 
-                <div id="collapse{{ $category->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapse{{ $budgetAmount->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead class="thead-light">
@@ -28,7 +28,7 @@
                             </thead>
                             @foreach(\App\Expense::ofCategory($budgetAmount->budget_category_id)->get() as $expense)
                                 <tr>
-                                    <td>{{ $expense->created_at->toFormattedDateString() }}</td>
+                                    <td>{{ $expense->date_paid->toFormattedDateString() }}</td>
                                     <td>{{ $expense->source }}</td>
                                     <td>{{ $expense->amount }}</td>
                                     <td><a href="{{ route('expense_show', ['expense' => $expense]) }}" class="btn btn-sm btn-primary">Edit</a></td>

@@ -7,10 +7,10 @@
         <input type="hidden" name="_method" value="PATCH">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="budget_category_id">Category</label>
-            <select name="budget_category_id" class="form-control">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" @if($expense->budget_category_id == $category->id)selected="selected"@endif>{{ $category->name }}</option>
+            <label for="budget_amount_id">Category</label>
+            <select name="budget_amount_id" class="form-control">
+                @foreach($budgetAmounts as $amount)
+                    <option value="{{ $amount->id }}" @if($expense->budget_amount_id == $amount->id)selected="selected"@endif>{{ $amount->budgetCategory->name }}</option>
                 @endforeach
             </select>
         </div>

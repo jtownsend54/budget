@@ -8,8 +8,8 @@
         <div class="form-group">
             <label for="budget_amount_id">Category</label>
             <select name="budget_amount_id" class="form-control">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" @if($budgetCategory->id == $category->id)selected="selected"@endif>{{ $category->name }}</option>
+                @foreach($budgetAmounts as $amount)
+                    <option value="{{ $amount->id }}" @if($budgetAmount->id == $amount->id)selected="selected"@endif>{{ $amount->budgetCategory->name }}</option>
                 @endforeach
             </select>
         </div>
