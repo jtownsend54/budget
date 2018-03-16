@@ -30,3 +30,9 @@ Route::get('/expenses/{budgetAmount}/create', 'ExpensesController@create')->name
 Route::get('/expenses/{expense}', 'ExpensesController@show')->name('expense_show');
 Route::post('/expenses', 'ExpensesController@store')->name('expense_store');
 Route::patch('/expenses/{expense}', 'ExpensesController@update')->name('expense_update');
+
+Route::get('/incomes', 'IncomesController@index')->name('incomes');
+Route::get('/incomes/{budget}/create', 'IncomesController@create')->name('income_create');
+Route::get('/incomes/{income}', 'IncomesController@show')->name('income_show');
+Route::post('/incomes', 'IncomesController@store')->name('income_store');
+Route::patch('/incomes/{income}', 'IncomesController@update')->name('income_update');
