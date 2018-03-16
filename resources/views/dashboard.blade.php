@@ -28,7 +28,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">${{ $budget->getTotalExpenses() }}</h5>
                 <p class="card-text">Spent</p>
             </div>
         </div>

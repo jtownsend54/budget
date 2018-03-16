@@ -25,4 +25,35 @@ class Expense extends Model
             ->orderBy('date_charged')
         ;
     }
+
+    /**
+     * @todo Might not need this function. Budget::getTotalExpenses uses relationships to figure this out
+     * Get the expense total for a specific budget amount (essentially a specific budget)
+     *
+     * @param BudgetAmount $budgetAmount
+     */
+    public static function getTotal(BudgetAmount $budgetAmount)
+    {
+        return self::total($budgetAmount, '=');
+    }
+
+    /**
+     * Get the running total of expenses for a budget amount starting with the
+     * passed in budget amount and previous in the past for the same category
+     *
+     * @param BudgetAmount $budgetAmount
+     */
+    public static function getRunningTotal(BudgetAmount $budgetAmount)
+    {
+        return self::total($budgetAmount, '<=');
+    }
+
+    private static function total(BudgetAmount $budgetAmount, $operator)
+    {
+        return self::leftJoin('budget_amounts', 'budget_amounts.id', '=', 'expenses.budget_amount_id')
+            ->where('expenses.budget_amount_id', $operator, $budgetAmount->getKey())
+            ->where('budget_amounts.budget_category_id', '=', $budgetAmount->budget_category_id)
+            ->get()
+            ->sum('amount');
+    }
 }

@@ -27,6 +27,18 @@ class Budget extends Model
         return $total;
     }
 
+    public function getTotalExpenses()
+    {
+        $total = 0;
+
+        /** @var BudgetAmount $budgetAmount */
+        foreach ($this->budgetAmounts as $budgetAmount) {
+            $total += $budgetAmount->expenses->sum('amount');
+        }
+
+        return $total;
+    }
+
     public function scopeCurrent()
     {
         return self::latest()->limit(1)->get()->first();

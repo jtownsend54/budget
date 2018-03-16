@@ -14,14 +14,15 @@ class BudgetAmount extends Model
         return $this->belongsTo(BudgetCategory::class);
     }
 
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
     public function getTotal()
     {
         // Sum all the expenses where the budget_amount_id is less than the passed in budgetAmount
-        $expenses = Expense::leftJoin('budget_amounts', 'budget_amounts.id', '=', 'expenses.budget_amount_id')
-            ->where('expenses.budget_amount_id', '<=', $this->getKey())
-            ->where('budget_amounts.budget_category_id', '=', $this->budget_category_id)
-            ->get()
-            ->sum('amount');
+        $expenses = Expense::getRunningTotal($this);
 
         // Sum all the added_to_this_month and adjustment where budget_amount_id is less than the passed in budgetAmount
         /** @var Collection $collection */
