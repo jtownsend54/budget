@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('content_title') Budgets @endsection
+@section('content_title') Income @endsection
 
 @section('content')
     <a href="{{ route('income_create') }}" class="btn btn-primary">New</a>

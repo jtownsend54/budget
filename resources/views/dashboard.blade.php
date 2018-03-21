@@ -16,7 +16,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">${{ $budget->incomes->sum('amount') - $budget->budgetAmounts->sum('added_to_this_month') }}</h5>
                 <p class="card-text">Left to be budgeted</p>
             </div>
         </div>

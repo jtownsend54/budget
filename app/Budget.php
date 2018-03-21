@@ -15,6 +15,11 @@ class Budget extends Model
         return $this->hasMany(BudgetAmount::class);
     }
 
+    public function incomes()
+    {
+        return $this->hasMany(Income::class);
+    }
+
     public function getRunningTotal()
     {
         $total = 0;

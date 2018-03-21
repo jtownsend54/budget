@@ -22,6 +22,11 @@
             <label for="bank_start">Amount in bank on the 1st</label>
             <input type="text" name="bank_start" class="form-control" value="{{ $budget->bank_start }}">
         </div>
+        <div class="form-group text-right">
+            <strong>
+                Available: $<span class="available">{{ $budget->incomes->sum('amount') }}</span>
+            </strong>
+        </div>
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
@@ -36,7 +41,7 @@
                     <td>{{ $budgetAmount->budgetCategory->name }}</td>
                     <td></td>
                     <td><input type="text" class="form-control" name="budget_amounts[{{$budgetAmount->getKey()}}][adjustment]" value="{{$budgetAmount->adjustment}}"/></td>
-                    <td><input type="text" class="form-control" name="budget_amounts[{{$budgetAmount->getKey()}}][added_to_this_month]" value="{{$budgetAmount->added_to_this_month}}"/></td>
+                    <td><input type="text" class="form-control added" name="budget_amounts[{{$budgetAmount->getKey()}}][added_to_this_month]" value="{{$budgetAmount->added_to_this_month}}"/></td>
                 </tr>
             @endforeach
         </table>
@@ -44,4 +49,32 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
+@endsection
+
+@section('javascripts')
+    <script>
+        var $available,
+            initialAmount,
+            addedToThisMonth;
+
+        $(function() {
+            $available = $('.available');
+            initialAmount = $available.text();
+
+            // Whenever a cursor leaves an added field, update the remaining total
+            $('.added').on('blur', function() {
+                $available.text(initialAmount - getTotalAdded());
+            });
+        });
+
+        function getTotalAdded() {
+            addedToThisMonth = 0;
+
+            $('.added').each(function(i, ele) {
+                addedToThisMonth += $(ele).val();
+            });
+
+            return addedToThisMonth;
+        }
+    </script>
 @endsection
