@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Budget;
+use App\Income;
 use Illuminate\Http\Request;
 
 class IncomesController extends Controller
@@ -13,7 +15,9 @@ class IncomesController extends Controller
      */
     public function index()
     {
-        //
+        return view('incomes.index', [
+            'incomes' => Income::all()
+        ]);
     }
 
     /**
@@ -23,52 +27,47 @@ class IncomesController extends Controller
      */
     public function create()
     {
-        //
+        return view('incomes.create', [
+            'budgets' => Budget::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        Income::create(request(['budget_id', 'amount', 'source']));
+
+        return redirect(route('incomes'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Income $income)
     {
-        //
-    }
+        $budgets = Budget::all();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('incomes.show', compact('income', 'budgets'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Income $income)
     {
-        //
+        $income->update(request(['budget_id', 'amount', 'source']));
+
+        return redirect(route('incomes'));
     }
 
     /**
