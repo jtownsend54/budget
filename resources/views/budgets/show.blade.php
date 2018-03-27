@@ -22,9 +22,15 @@
             <label for="bank_start">Amount in bank on the 1st</label>
             <input type="text" name="bank_start" class="form-control" value="{{ $budget->bank_start }}">
         </div>
+        <div class="form-group">
+            <label for="projected_income">Projected Income</label>
+            <input type="text" name="projected_income" class="form-control" value="{{ $budget->projected_income }}">
+        </div>
         <div class="form-group text-right">
             <strong>
-                Available: $<span class="available">{{ $budget->incomes->sum('amount') }}</span>
+                Unallocated: $<span class="unallocated">{{ number_format($budget->bank_start - $previousAmount, 2) }}</span>
+                <br>
+                Available: $<span class="available">{{ $budget->projected_income }}</span>
             </strong>
         </div>
         <table class="table table-bordered">
@@ -40,7 +46,7 @@
                 <tr>
                     <td>{{ $budgetAmount->budgetCategory->name }}</td>
                     <td></td>
-                    <td><input type="text" class="form-control" name="budget_amounts[{{$budgetAmount->getKey()}}][adjustment]" value="{{$budgetAmount->adjustment}}"/></td>
+                    <td><input type="text" class="form-control adjustment" name="budget_amounts[{{$budgetAmount->getKey()}}][adjustment]" value="{{$budgetAmount->adjustment}}"/></td>
                     <td><input type="text" class="form-control added" name="budget_amounts[{{$budgetAmount->getKey()}}][added_to_this_month]" value="{{$budgetAmount->added_to_this_month}}"/></td>
                 </tr>
             @endforeach
@@ -54,23 +60,31 @@
 @section('javascripts')
     <script>
         var $available,
-            initialAmount,
+            $unallocated,
+            initialAvailable,
+            initialUnallocated,
             addedToThisMonth;
 
         $(function() {
             $available = $('.available');
-            initialAmount = $available.text();
+            $unallocated = $('.unallocated');
+            initialAvailable = $available.text();
+            initialUnallocated = $unallocated.text();
 
             // Whenever a cursor leaves an added field, update the remaining total
             $('.added').on('blur', function() {
-                $available.text(initialAmount - getTotalAdded());
+                $available.text(initialAvailable - getTotalAdded('.added'));
+            });
+
+            $('.adjustment').on('blur', function() {
+                $unallocated.text(initialUnallocated - getTotalAdded('.adjustment'));
             });
         });
 
-        function getTotalAdded() {
+        function getTotalAdded(field) {
             addedToThisMonth = 0;
 
-            $('.added').each(function(i, ele) {
+            $(field).each(function(i, ele) {
                 addedToThisMonth += $(ele).val();
             });
 

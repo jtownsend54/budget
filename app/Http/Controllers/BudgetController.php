@@ -23,7 +23,12 @@ class BudgetController extends Controller
 
     public function show(Budget $budget)
     {
-        return view('budgets.show', compact('budget'));
+        /** @var Budget $previousBudget */
+        $previousBudget = Budget::previous();
+
+        $previousAmount = $previousBudget ? $previousBudget->getRunningTotal() : 0;
+
+        return view('budgets.show', compact('budget', 'previousAmount'));
     }
 
     public function store()

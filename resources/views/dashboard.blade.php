@@ -16,13 +16,13 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">${{ $budget->incomes->sum('amount') - $budget->budgetAmounts->sum('added_to_this_month') }}</h5>
+                <h5 class="card-title">${{ $budget->projected_income - $budget->budgetAmounts->sum('added_to_this_month') }}</h5>
                 <p class="card-text">Left to be budgeted</p>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">${{ $budget->bank_start - $budget->getTotalExpenses() + $budget->incomes->sum('amount') }}</h5>
                 <p class="card-text">Real Time</p>
             </div>
         </div>
