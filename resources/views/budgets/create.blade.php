@@ -22,6 +22,10 @@
             <input type="text" name="bank_start" class="form-control">
         </div>
         <div class="form-group">
+            <label for="projected_income">Projected Income</label>
+            <input type="text" name="projected_income" class="form-control">
+        </div>
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>

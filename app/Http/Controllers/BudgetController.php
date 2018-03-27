@@ -29,7 +29,7 @@ class BudgetController extends Controller
     public function store()
     {
         /** @var Budget $budget */
-        $budget = Budget::create(request(['name', 'start', 'end', 'bank_start']));
+        $budget = Budget::create(request(['name', 'start', 'end', 'bank_start', 'projected_income']));
 
         foreach (BudgetCategory::all() as $budgetCategory) {
             BudgetAmount::create([
@@ -43,7 +43,7 @@ class BudgetController extends Controller
 
     public function update(Budget $budget)
     {
-        $budget->update(request(['name', 'start', 'end', 'bank_start']));
+        $budget->update(request(['name', 'start', 'end', 'bank_start', 'projected_income']));
 
         // Update all the budget amounts
         foreach (request('budget_amounts') as $key => $amount) {
