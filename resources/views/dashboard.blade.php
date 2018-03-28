@@ -33,5 +33,63 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Budget</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($budget->budgetAmounts as $budgetAmount)
+                            <tr>
+                                <td>{{ $budgetAmount->budgetCategory->name }}</td>
+                                <td class="text-right">${{ number_format($budgetAmount->getTotal(), 2) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-8">
+            <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1576" height="664" style="display: block; height: 332px; width: 788px;"></canvas>
+        </div>
+    </div>
     @parent
+@endsection
+
+@section('javascripts')
+    @parent
+    <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                datasets: [{
+                    data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: '#007bff',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                }
+            }
+        });
+    </script>
 @endsection
