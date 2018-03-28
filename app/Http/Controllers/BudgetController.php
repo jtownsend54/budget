@@ -28,7 +28,7 @@ class BudgetController extends Controller
 
         $previousAmount = $previousBudget ? $previousBudget->getRunningTotal() : 0;
 
-        return view('budgets.show', compact('budget', 'previousAmount'));
+        return view('budgets.show', compact('budget', 'previousAmount', 'previousBudget'));
     }
 
     public function store()
