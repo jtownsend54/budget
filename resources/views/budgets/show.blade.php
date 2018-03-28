@@ -45,7 +45,7 @@
             @foreach($budget->budgetAmounts as $budgetAmount)
                 <tr>
                     <td>{{ $budgetAmount->budgetCategory->name }}</td>
-                    <td></td>
+                    <td>${{ $previousBudget->budgetAmounts->where('budget_category_id', '=', $budgetAmount->budget_category_id)->first()->getTotal() }}</td>
                     <td><input type="text" class="form-control adjustment" name="budget_amounts[{{$budgetAmount->getKey()}}][adjustment]" value="{{$budgetAmount->adjustment}}"/></td>
                     <td><input type="text" class="form-control added" name="budget_amounts[{{$budgetAmount->getKey()}}][added_to_this_month]" value="{{$budgetAmount->added_to_this_month}}"/></td>
                 </tr>

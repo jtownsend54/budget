@@ -24,7 +24,8 @@ class BudgetAmount extends Model
         // Sum all the expenses where the budget_amount_id is less than the passed in budgetAmount
         $expenses = Expense::getRunningTotal($this);
 
-        // Sum all the added_to_this_month and adjustment where budget_amount_id is less than the passed in budgetAmount
+        // Sum all the added_to_this_month and adjustment where budget_amount_id is less than or equal to the passed in
+        // budgetAmount
         /** @var Collection $collection */
         $collection = self::where('id', '<=', $this->getKey())
             ->where('budget_category_id', '=', $this->budget_category_id)

@@ -12,7 +12,7 @@ class BudgetController extends Controller
     public function index()
     {
         return view('budgets.index', [
-            'budgets' => Budget::all()
+            'budgets' => Budget::all()->sortByDesc('id')
         ]);
     }
 
