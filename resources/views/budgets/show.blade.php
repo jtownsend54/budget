@@ -73,11 +73,11 @@
 
             // Whenever a cursor leaves an added field, update the remaining total
             $('.added').on('blur', function() {
-                $available.text(initialAvailable - getTotalAdded('.added'));
+                $available.text(Math.round(initialAvailable - getTotalAdded('.added')));
             });
 
             $('.adjustment').on('blur', function() {
-                $unallocated.text(initialUnallocated - getTotalAdded('.adjustment'));
+                $unallocated.text(Math.round(initialUnallocated - getTotalAdded('.adjustment')));
             });
         });
 
@@ -85,7 +85,11 @@
             addedToThisMonth = 0;
 
             $(field).each(function(i, ele) {
-                addedToThisMonth += $(ele).val();
+                if (!$(ele).val()) {
+                    return;
+                }
+
+                addedToThisMonth += parseFloat($(ele).val());
             });
 
             return addedToThisMonth;
