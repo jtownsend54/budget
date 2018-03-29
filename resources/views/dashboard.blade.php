@@ -33,8 +33,9 @@
             </div>
         </div>
     </div>
+    <br>
     <div class="row">
-        <div class="col-4">
+        <div class="col-6">
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -54,7 +55,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-6">
             <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1576" height="664" style="display: block; height: 332px; width: 788px;"></canvas>
         </div>
     </div>
