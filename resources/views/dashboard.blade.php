@@ -68,9 +68,9 @@
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                labels: ["{!! implode('","', \App\Budget::all()->pluck('name')->all()) !!}"],
                 datasets: [{
-                    data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                    data: [{{ implode(',', \App\Budget::all()->pluck('bank_start')->all()) }}],
                     lineTension: 0,
                     backgroundColor: 'transparent',
                     borderColor: '#007bff',
@@ -82,12 +82,19 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: false
+                            beginAtZero: true
                         }
                     }]
                 },
+                title: {
+                    display: true,
+                    text: 'First of the Month'
+                },
+                hover: {
+                    mode: 'nearest'
+                },
                 legend: {
-                    display: false,
+                    display: false
                 }
             }
         });
