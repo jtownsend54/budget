@@ -28,9 +28,9 @@
         </div>
         <div class="form-group text-right">
             <strong>
-                Unallocated: $<span class="unallocated">{{ number_format($budget->bank_start - $previousAmount, 2) }}</span>
+                Unallocated: $<span class="unallocated">{{ number_format($budget->bank_start - $previousAmount - $budget->budgetAmounts->sum('adjustment'), 2) }}</span>
                 <br>
-                Available: $<span class="available">{{ $budget->projected_income }}</span>
+                Available: $<span class="available">{{ number_format($budget->projected_income - $budget->budgetAmounts->sum('added_to_this_month'), 2) }}</span>
             </strong>
         </div>
         <table class="table table-bordered">

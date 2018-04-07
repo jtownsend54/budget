@@ -10,13 +10,13 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">${{ number_format($budget->bank_start - $previousAmount, 2) }}</h5>
+                <h5 class="card-title">${{ number_format($budget->bank_start - $previousAmount - $budget->budgetAmounts->sum('adjustment'), 2) }}</h5>
                 <p class="card-text">Unallocated</p>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">${{ $budget->projected_income - $budget->budgetAmounts->sum('added_to_this_month') }}</h5>
+                <h5 class="card-title">${{ number_format($budget->projected_income - $budget->budgetAmounts->sum('added_to_this_month'), 2) }}</h5>
                 <p class="card-text">Left to be budgeted</p>
             </div>
         </div>
