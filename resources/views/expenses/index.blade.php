@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>{{ $expense->date_paid->toFormattedDateString() }}</td>
                                     <td>{{ $expense->source }}</td>
-                                    <td>{{ $expense->amount }}</td>
+                                    <td class="text-right">{{ number_format($expense->amount, 2) }}</td>
                                     <td><a href="{{ route('expense_show', ['expense' => $expense]) }}" class="btn btn-sm btn-primary">Edit</a></td>
                                 </tr>
                             @endforeach
