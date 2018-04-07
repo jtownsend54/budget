@@ -19,6 +19,7 @@ class Expense extends Model
         $currentBudget = Budget::current();
 
         $query
+            ->select('expenses.*')
             ->leftJoin('budget_amounts', 'expenses.budget_amount_id', '=', 'budget_amounts.id')
             ->where('budget_amounts.budget_id', '=', $currentBudget->id)
             ->where('budget_amounts.budget_category_id', '=', $categoryId)
