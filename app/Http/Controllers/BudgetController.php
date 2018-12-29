@@ -43,7 +43,7 @@ class BudgetController extends Controller
             ]);
         }
 
-        return redirect(route('budgets'));
+        return redirect(route('budget_update', ['budget' => $budget]));
     }
 
     public function update(Budget $budget)
@@ -61,6 +61,6 @@ class BudgetController extends Controller
             ]);
         }
 
-        return redirect(route('budgets'));
+        return redirect(route('budget_update', ['budget' => $budget]));
     }
 }

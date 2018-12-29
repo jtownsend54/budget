@@ -16,7 +16,7 @@ class IncomesController extends Controller
     public function index()
     {
         return view('incomes.index', [
-            'incomes' => Income::all()
+            'incomes' => Income::all()->sortByDesc('created_at')
         ]);
     }
 
@@ -28,7 +28,7 @@ class IncomesController extends Controller
     public function create()
     {
         return view('incomes.create', [
-            'budgets' => Budget::all()
+            'budgets' => Budget::all()->sortByDesc('created_at')
         ]);
     }
 
@@ -52,7 +52,7 @@ class IncomesController extends Controller
      */
     public function show(Income $income)
     {
-        $budgets = Budget::all();
+        $budgets = Budget::all()->sortByDesc('created_at');
 
         return view('incomes.show', compact('income', 'budgets'));
     }
