@@ -24,14 +24,21 @@
         </div>
         <div class="form-group">
             <label for="date_charged">Date Charged</label>
-            <input type="text" name="date_charged" class="form-control" value="{{ $expense->date_charged }}">
+            <input type="text" name="date_charged" class="form-control" autocomplete="off" value="{{ $expense->date_charged }}">
         </div>
         <div class="form-group">
             <label for="date_paid">Date Paid</label>
-            <input type="text" name="date_paid" class="form-control" value="{{ $expense->date_paid }}">
+            <input type="text" name="date_paid" class="form-control" autocomplete="off" value="{{ $expense->date_paid }}">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
+@endsection
+
+@section('javascripts')
+    <script>
+        $('[name="date_charged"]').datepicker({ format: 'yyyy-mm-dd' });
+        $('[name="date_paid"]').datepicker({ format: 'yyyy-mm-dd' });
+    </script>
 @endsection
