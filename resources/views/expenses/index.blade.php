@@ -26,7 +26,7 @@
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
-                            @foreach(\App\Expense::ofCategory($budgetAmount->budget_category_id)->get()->sortBy('date_paid') as $expense)
+                            @foreach(\App\Expense::ofCategory($budget, $budgetAmount->budget_category_id)->get()->sortBy('date_paid') as $expense)
                                 <tr>
                                     <td>{{ $expense->date_paid->toFormattedDateString() }}</td>
                                     <td>{{ $expense->source }}</td>

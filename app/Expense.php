@@ -14,14 +14,12 @@ class Expense extends Model
      * @param Builder $query
      * @param $categoryId
      */
-    public function scopeOfCategory($query, $categoryId)
+    public function scopeOfCategory($query, Budget $budget, $categoryId)
     {
-        $currentBudget = Budget::current();
-
         $query
             ->select('expenses.*')
             ->leftJoin('budget_amounts', 'expenses.budget_amount_id', '=', 'budget_amounts.id')
-            ->where('budget_amounts.budget_id', '=', $currentBudget->id)
+            ->where('budget_amounts.budget_id', '=', $budget->id)
             ->where('budget_amounts.budget_category_id', '=', $categoryId)
             ->orderBy('date_charged')
         ;

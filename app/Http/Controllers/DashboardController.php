@@ -10,13 +10,18 @@ class DashboardController extends Controller
     public function index()
     {
         /** @var Budget $budget */
-        $budget         = Budget::current();
+        $budgetId = request()->get('budget_id');
+        $budget = Budget::current();
+
+        if ($budgetId) {
+            $budget = Budget::find($budgetId);
+        }
 
         /** @var Budget $previousBudget */
-        $previousBudget = Budget::previous();
+        $previousBudget = $budget->previous();
 
         $previousAmount = $previousBudget ? $previousBudget->getRunningTotal() : 0;
 
-        return view('dashboard', compact('budget', 'previousBudget', 'previousAmount'));
+        return view('dashboard', compact('budget', 'previousAmount'));
     }
 }

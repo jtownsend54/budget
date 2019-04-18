@@ -17,8 +17,16 @@ class ExpensesController extends Controller
      */
     public function index()
     {
+        $budgetId = request()->get('budget_id');
+        $budget = Budget::current();
+
+        if ($budgetId) {
+            $budget = Budget::find($budgetId);
+        }
+
         return view('expenses.index', [
-            'budgetAmounts' => Budget::current()->budgetAmounts
+            'budget' => $budget,
+            'budgetAmounts' => $budget->budgetAmounts
         ]);
     }
 

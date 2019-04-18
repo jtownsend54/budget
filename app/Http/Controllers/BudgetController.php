@@ -24,7 +24,7 @@ class BudgetController extends Controller
     public function show(Budget $budget)
     {
         /** @var Budget $previousBudget */
-        $previousBudget = Budget::previous();
+        $previousBudget = $budget->previous();
 
         $previousAmount = $previousBudget ? $previousBudget->getRunningTotal() : 0;
 

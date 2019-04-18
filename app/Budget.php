@@ -49,12 +49,12 @@ class Budget extends Model
         return self::latest()->limit(1)->get()->first();
     }
 
-    public static function previous()
+    public function previous()
     {
-        /** @var Collection $collection */
-        $collection = self::latest()->limit(2)->get();
-        $collection->shift();
+        if ($this->getKey() <= 1) {
+            return null;
+        }
 
-        return $collection->first();
+        return Budget::find($this->getKey() - 1);
     }
 }
